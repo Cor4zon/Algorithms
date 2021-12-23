@@ -282,7 +282,13 @@ s += " "*16
 s = s.encode("utf-8")
 key = "abcd1234abcd1234"
 
+
+print(type(s))
+
 es = encrypt(s, key)
+
+
+
 ds = decrypt(es, key)
 
 print(f"Encrypted: {conv_to_text(es)}")
