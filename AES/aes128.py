@@ -276,20 +276,27 @@ def conv_to_text(bytes):
     return text
 
 
+
 s = input("Get text:")
 diff = 16 - (len(s) % 16)
 s += " "*16
 s = s.encode("utf-8")
-key = "abcd1234abcd1234"
+
+key = "alphabetagamaepls"
+
+number_of_blocks = int(len(s) / 16)
+
+res = []
+for i in range(number_of_blocks):
+    enc_part = encrypt(s[16*i: 16*i + 16], key)
+    res.extend(enc_part)
 
 
-print(type(s))
+ds_res = []
+for i in range(number_of_blocks):
+    dec_part = decrypt(res[i*16: i*16 + 16], key)
+    ds_res.extend(dec_part)
 
-es = encrypt(s, key)
 
-
-
-ds = decrypt(es, key)
-
-print(f"Encrypted: {conv_to_text(es)}")
-print(f"Decrypted: {conv_to_text(ds)}")
+print(f"Encrypted: {conv_to_text(res)}")
+print(f"Decrypted: {conv_to_text(ds_res)}")
